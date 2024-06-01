@@ -1,5 +1,6 @@
 package com.example.universitymanagement.controller;
 
+import com.example.universitymanagement.entity.ChangePasswordRequest;
 import com.example.universitymanagement.entity.UserUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,15 @@ public class UserController {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/update-password")
+    public ResponseEntity<?> changePassword(
+            @RequestBody ChangePasswordRequest request,
+            Principal connectedUser
+    ) {
+        userService.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
     }
 }
