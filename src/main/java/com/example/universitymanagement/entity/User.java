@@ -41,7 +41,7 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
-
+    private String avatar; // Add this line
     @Enumerated(EnumType.STRING)
     private Role role;
 

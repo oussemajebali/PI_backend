@@ -12,8 +12,10 @@ import com.example.universitymanagement.service.UserService;
 import java.security.Principal;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -29,11 +31,16 @@ public class UserController {
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    @PostMapping("/adduser")
+    public User createUser(@RequestParam("name") String name,
+                           @RequestParam("lastName") String lastName,
+                           @RequestParam("age") int age,
+                           @RequestParam("email") String email,
+                           @RequestParam("password") String password,
+                           @RequestParam("role") String role,
+                           @RequestParam("avatar") MultipartFile avatar) {
+        return userService.saveUser(name, lastName, age, email, password, role, avatar);
     }
-
 
     @PutMapping("/update/{id}")
     public ResponseEntity<User> updatePersonalData(@PathVariable int id,@RequestBody UserUpdate updatedUser) {

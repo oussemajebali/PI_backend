@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import com.example.universitymanagement.entity.ChangePasswordRequest;
+import com.example.universitymanagement.entity.Role;
 import com.example.universitymanagement.entity.UserUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +15,14 @@ import org.springframework.stereotype.Service;
 import com.example.universitymanagement.entity.User;
 import com.example.universitymanagement.repository.UserRepository;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +32,9 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
+    private final String AVATAR_DIR = "avatars/";
 
+    public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
         var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
         // check if the current password is correct
@@ -51,14 +61,39 @@ public class UserService {
         return userRepository.findById(Id).orElse(null);
     }
 
-    public User saveUser(User user) {
+    public User saveUser(String name, String lastName, int age, String email, String password, String role, MultipartFile avatar) {
+        String avatarPath = saveAvatarFile(avatar);
+        User user = User.builder()
+                .name(name)
+                .lastName(lastName)
+                .age(age)
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .role(Role.valueOf(role))
+                .avatar(avatarPath)
+                .build();
         return userRepository.save(user);
+    }
+
+    private String saveAvatarFile(MultipartFile avatar) {
+        if (avatar.isEmpty()) {
+            return null;
+        }
+
+        try {
+            byte[] bytes = avatar.getBytes();
+            Path path = Paths.get(AVATAR_DIR + avatar.getOriginalFilename());
+            Files.createDirectories(path.getParent());
+            Files.write(path, bytes);
+            return path.toString();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to store avatar file", e);
+        }
     }
 
     public void deleteUser(int Id) {
         userRepository.deleteById(Id);
     }
-
 
     public User updateUserData(String email, UserUpdate updatedUser) {
         User user = userRepository.findByEmail(email)
