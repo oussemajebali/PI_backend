@@ -17,13 +17,17 @@ import java.util.List;
 @Table(name = "_event")
 public class Event {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    private String title;
     private String description;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private String location;
+    private int maxAttendees;
+
+
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Participation> participations;

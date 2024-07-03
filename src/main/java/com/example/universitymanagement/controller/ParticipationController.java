@@ -25,7 +25,7 @@ public class ParticipationController {
         return participationService.getParticipationById(id);
     }
 
-    @PostMapping
+    @PostMapping("/event/{id}/participate")
     public Participation createParticipation(@RequestBody Participation participation) {
         return participationService.createParticipation(participation);
     }
