@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-
     private static final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
             "/v2/api-docs",
@@ -25,7 +24,9 @@ public class SecurityConfig {
             "/swagger-resources",
             "/swagger-resources/**",
             "/swagger-ui/**",
-            "/swagger-ui.html"};
+            "/swagger-ui.html",
+            "/avatars/**"  // Add this line to allow access to avatars
+    };
 
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
@@ -37,8 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                                .anyRequest()
-                                .authenticated()
+                                .anyRequest().hasAnyAuthority("CLUB_LEADER","UNIVERSITY_ADMIN")
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

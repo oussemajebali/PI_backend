@@ -62,6 +62,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .role(user.getRole().toString())
+                .userId(Long.valueOf(user.getUserId())) // Set the user_id
                 .build();
     }
     private void saveUserToken(User user, String jwtToken) {
