@@ -16,7 +16,7 @@ public class AvatarController {
 
     private final Path avatarLocation = Paths.get("avatars");
 
-    @GetMapping("/{filename}")
+    @GetMapping("/avatars/{filename}")
     public ResponseEntity<Resource> getAvatar(@PathVariable String filename) {
         try {
             Path file = avatarLocation.resolve(filename);
