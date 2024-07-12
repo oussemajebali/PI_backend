@@ -33,6 +33,7 @@ public class AuthenticationService {
                 .age(request.getAge())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.valueOf("SIMPLE_USER"))
                 .build();
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -61,6 +62,8 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .role(user.getRole().toString())
+                .userId(Long.valueOf(user.getUserId())) // Set the user_id
                 .build();
     }
     private void saveUserToken(User user, String jwtToken) {
