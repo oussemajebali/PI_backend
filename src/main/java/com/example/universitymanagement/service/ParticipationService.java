@@ -39,3 +39,4 @@ public class ParticipationService {
         participationRepository.deleteById(id);
     }
 }
+
