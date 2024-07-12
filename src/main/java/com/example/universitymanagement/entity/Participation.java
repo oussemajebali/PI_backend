@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,7 +22,8 @@ public class Participation {
     private String userName;
     private LocalDateTime participationTime;
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY) // Ensure proper lazy loading
     @JoinColumn(name = "event_id")
     private Event event;
 

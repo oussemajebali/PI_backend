@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/particiaption")
+@RequestMapping("/api/v1/participations")
 @RequiredArgsConstructor
 public class ParticipationController {
     @Autowired
@@ -25,7 +25,7 @@ public class ParticipationController {
         return participationService.getParticipationById(id);
     }
 
-    @PostMapping("/event/{id}/participate")
+    @PostMapping
     public Participation createParticipation(@RequestBody Participation participation) {
         return participationService.createParticipation(participation);
     }
