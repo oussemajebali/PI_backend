@@ -25,7 +25,8 @@ public class SecurityConfig {
             "/swagger-resources/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
-            "/avatars/**"  // Add this line to allow access to avatars
+            "/avatars/**"  ,
+            "/api/v1/participations/**"// Add this line to allow access to avatars
     };
 
     private final JwtAuthFilter jwtAuthFilter;
