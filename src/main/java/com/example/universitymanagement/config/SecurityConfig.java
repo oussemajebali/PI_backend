@@ -18,6 +18,8 @@ public class SecurityConfig {
 
     private static final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
+            "/api/v1/space/**",
+            //"/api/v1/upload/photo",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -25,8 +27,11 @@ public class SecurityConfig {
             "/swagger-resources/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
-            "/avatars/**"  // Add this line to allow access to avatars
-    };
+            "/avatars/**",
+            "/reservation/**",
+            "/space/**",
+            "/api/upload/**",
+             };
 
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
