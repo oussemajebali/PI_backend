@@ -1,7 +1,6 @@
 package com.example.universitymanagement.controller;
 
 import com.example.universitymanagement.entity.Article;
-import com.example.universitymanagement.entity.Club;
 import com.example.universitymanagement.repository.ArticleRepository;
 import com.example.universitymanagement.repository.ClubRepository;
 import com.example.universitymanagement.service.ArticleService;
@@ -11,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/article")
@@ -26,6 +26,10 @@ public class ArticleController {
     @GetMapping
     public List<Article> getAllArticles() {
             return articleRepository.findAll();
+    }
+    @GetMapping("/{Id}")
+    public Optional<Article> findArticle(@PathVariable int Id) {
+        return articleRepository.findById(Id);
     }
     @GetMapping("/club/{clubId}")
     public List<Article> findArticlesByClub(@PathVariable int clubId) {
