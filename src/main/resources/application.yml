@@ -21,6 +21,17 @@ spring:
       max-file-size: 2MB
       max-request-size: 2MB
 
+  mail:
+    host: smtp.mailgun.org
+    port: 465
+    username: postmaster@sandbox84eec6790c94415d91dff6cd6ba213ac.mailgun.org
+    password: 7f70fe110abebd861ba6b7f36c3e5ddc-8a084751-2261e69b
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 application:
   security:
     jwt:
@@ -31,3 +42,8 @@ application:
   web:
     resources:
       static-locations: file:./avatars/
+
+mailgun:
+  api-key: b438fbfa19fefe86b46333a2b60b67d1-8a084751-b997c24b
+  domain: sandbox84eec6790c94415d91dff6cd6ba213ac.mailgun.org
+  from-email: integrationprojecttesting@gmail.com

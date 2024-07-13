@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @Builder
@@ -19,14 +23,13 @@ public class Reservation {
     @GeneratedValue
     private int id;
 
-    private String userId;
-
-    private LocalDateTime startTime;
-
-    private LocalDateTime endTime;
+    private int userId;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     @ManyToOne
-    @JoinColumn(name = "space_id")
+    @JoinColumn(name = "space_id", nullable = false)
+    @JsonBackReference
     private Space space;
 
 
