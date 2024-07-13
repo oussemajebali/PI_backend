@@ -17,10 +17,16 @@ public class Article {
     @Id
     @GeneratedValue
     private int aritcle_Id;
+
     private String title;
+
+    private double price;
+
     private String content;
 
+    private String photoUrl;
 
-//    @ManyToOne
-//    private Club club;
+
+    @ManyToOne
+    private Club club;
 }

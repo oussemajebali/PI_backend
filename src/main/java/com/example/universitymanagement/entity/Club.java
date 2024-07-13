@@ -22,4 +22,7 @@ public class Club {
 
     @OneToMany(mappedBy = "club")
     private List<Article> articles;
+
+    @ManyToOne
+    private User user;
 }

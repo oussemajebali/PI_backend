@@ -45,8 +45,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Club> clubs;
+    @OneToMany(mappedBy = "user")
+    private List<Club> clubs;
 
     @Override
     public String getUsername() {

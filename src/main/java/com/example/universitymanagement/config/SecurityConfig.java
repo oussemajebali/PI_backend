@@ -19,6 +19,7 @@ public class SecurityConfig {
     private static final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
             "/api/v1/space/**",
+            "/api/article/**",
             //"/api/v1/upload/photo",
             "/v2/api-docs",
             "/v3/api-docs",
@@ -44,6 +45,7 @@ public class SecurityConfig {
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
                                 .anyRequest().hasAnyAuthority("CLUB_LEADER","UNIVERSITY_ADMIN")
+
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
