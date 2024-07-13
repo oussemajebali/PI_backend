@@ -31,7 +31,13 @@ public class Event {
     @Column(length = 1000)
     private String images;  // Add this line to store image paths
 
-    @JsonManagedReference
+    @JsonManagedReference("event-participation")
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Participation> participations = new ArrayList<>();
+
+    @JsonManagedReference("event-rating")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings = new ArrayList<>();
+
+
 }

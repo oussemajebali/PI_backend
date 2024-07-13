@@ -22,9 +22,9 @@ public class Participation {
     private String userName;
     private LocalDateTime participationTime;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY) // Ensure proper lazy loading
-    @JoinColumn(name = "event_id")
+    @JsonBackReference("event-participation")
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
 }
