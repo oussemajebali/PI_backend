@@ -31,6 +31,9 @@ public class SecurityConfig {
             "/reservation/**",
             "/space/**",
             "/api/upload/**",
+            "/api/v1/clubs/**",
+            "/api/v1/memberships/**",
+            "/api/v1/requests/**"
              };
 
     private final JwtAuthFilter jwtAuthFilter;

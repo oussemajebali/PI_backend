@@ -5,11 +5,10 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
   datasource:
-    url: jdbc:postgresql://postgresql-178380-0.cloudclusters.net:10010/universitymanagment1
-    username: admin_university
-    password: admin_university
-    driver-class-name: org.postgresql.Driver
-
+    url: jdbc:mysql://localhost:3306/university_management?useSSL=false&serverTimezone=UTC
+    username: root
+    password:   # Change to your MySQL root password
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,8 +16,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
 
 application:
   security:
