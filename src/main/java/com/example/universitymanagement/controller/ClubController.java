@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -19,12 +20,11 @@ public class ClubController {
 
     // Create a new club
     @PostMapping
-    public ResponseEntity<Club> createClub(@RequestBody Map<String, Object> payload) {
-        String name = (String) payload.get("name");
-        String description = (String) payload.get("description");
-        int leaderId = Integer.valueOf(payload.get("leader").toString()); // Extract leaderId from the payload
-
-        Club newClub = clubService.createClub(name, description, leaderId);
+    public ResponseEntity<Club> createClub(@RequestParam("name") String name,
+                                           @RequestParam("description") String description,
+                                           @RequestParam("leader") int leaderId,
+                                           @RequestParam("logo") MultipartFile logo) {
+        Club newClub = clubService.createClub(name, description, leaderId, logo);
         return ResponseEntity.ok(newClub);
     }
 

@@ -24,17 +24,17 @@ public class Club {
     private Long id;
 
     private String name;
-
     private String description;
+    private String logoUrl; // Add this field for the club logo
 
     @ManyToOne
     @JoinColumn(name = "leader_id", nullable = false)
     private User leader;
 
     @Enumerated(EnumType.STRING)
-    private ClubStatus status; // e.g., PENDING, APPROVED, REJECTED
+    private ClubStatus status;
 
     @OneToMany(mappedBy = "club")
-    @JsonIgnore // Ignore this field during serialization
+    @JsonIgnore
     private List<ClubMembership> memberships;
 }

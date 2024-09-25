@@ -8,13 +8,17 @@ import com.example.universitymanagement.repository.ClubRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ClubMembershipService {
 
     private final ClubMembershipRepository clubMembershipRepository;
     private final ClubRepository clubRepository;
-
+    public List<ClubMembership> getAllClubsMemerbership() {
+        return clubMembershipRepository.findAll();
+    }
     public ClubMembership saveJoinRequest(ClubMembership membership) {
         membership.setStatus(MembershipStatus.PENDING); // Default status is PENDING
         return clubMembershipRepository.save(membership);
