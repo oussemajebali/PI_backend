@@ -1,10 +1,15 @@
 package com.example.universitymanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -29,5 +34,7 @@ public class Club {
     @Enumerated(EnumType.STRING)
     private ClubStatus status; // e.g., PENDING, APPROVED, REJECTED
 
-    // other fields as needed
+    @OneToMany(mappedBy = "club")
+    @JsonIgnore // Ignore this field during serialization
+    private List<ClubMembership> memberships;
 }

@@ -18,13 +18,8 @@ public class ClubMembershipController {
         return ResponseEntity.ok(clubMembershipService.saveJoinRequest(membership));
     }
 
-    @PutMapping("/approve/{id}")
-    public ResponseEntity<ClubMembership> approveRequest(@PathVariable Long id) {
-        return ResponseEntity.ok(clubMembershipService.approveJoinRequest(id));
-    }
-
-    @PutMapping("/reject/{id}")
-    public ResponseEntity<ClubMembership> rejectRequest(@PathVariable Long id) {
-        return ResponseEntity.ok(clubMembershipService.rejectJoinRequest(id));
+    @PostMapping("/process")
+    public ResponseEntity<ClubMembership> processJoinRequest(@RequestBody ClubMembership membership) {
+        return ResponseEntity.ok(clubMembershipService.processJoinRequest(membership));
     }
 }
